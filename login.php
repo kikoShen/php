@@ -58,7 +58,7 @@
       </div>
     
       <div class="login_form">
-        <form action="checklogin.php" id="login_form" method="post" 
+        <form action="checklogin.php" id="login_form" method="post" name="login"
              onsubmit="return checkuser()">
           <div class="form-group">
             <label for="text" class="t">用户名　：</label>

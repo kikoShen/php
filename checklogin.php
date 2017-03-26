@@ -1,6 +1,7 @@
 <?php 
    $user=trim($_POST['username']);
    $passwd=trim($_POST['password']);
+   
 
    include ("mysql.php");
 

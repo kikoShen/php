@@ -8,8 +8,7 @@
   if($link->connect_error){
   	print 'connection failed'.$link->connect_error;
     exit();
-  }else
-    print "connection success <br/>";
+  }
 
 $link ->query("set names GB2312");
 
