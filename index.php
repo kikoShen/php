@@ -39,6 +39,9 @@
 				
 	</script>
 
+  
+  
+
 	<!--[if lt IE 8]>
   		<div style='text-align:center'><a href="http://www.microsoft.com/windows/internet-explorer/default.aspx?ocid=ie6_countdown_bannercode"><img src="http://www.theie6countdown.com/img/upgrade.jpg"border="0"alt=""/></a></div>  
  	<![endif]-->
@@ -70,7 +73,6 @@
                 <li><a href="work.html">Work</a></li>
                 <li><a href="blog.html">Blog</a></li>
                 <?php 
-                
                   if(isset($_SESSION['username'])){
                     echo '<li class="sub-menu"><a href="self_center.php">'.$_SESSION['username'].'</a><ul>
                     <li><a href="logout.php">Logout</a></li>
