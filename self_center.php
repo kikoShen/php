@@ -1,5 +1,6 @@
 <?php 
 @session_start();
+include("mysql.php");
 ?>
 <script language="javascript" type="text/javascript">
     if(top.location!=self.location)top.location=self.location;
@@ -311,16 +312,26 @@
                             </section>
                         </div>
                     </c:if>
-                    <c:if test="${user.authority==666}">
-                        <section> <a href="admin/index.php" class="link-1">
+                  
+                  
+                       
+                              <?php 
+                    $sql="select rank from user where user_name='".$_SESSION['username']."'";
+                    $result=$link->query($sql) or die("select failed!");
+                    $result=$result->fetch_assoc();
+                     if($result['rank']!=2){
+                          echo ' <section> <a href="admin/index.php" class="link-1"><button type="submit"  id="button_manage"
+                                    class="btn btn-primary btn-lg">&nbsp;管&nbsp;理&nbsp; </button></a></section>';
+                     }
+                     
+                     $link->close();
+                    ?>
 
 
+                            
 
-                            <button type="submit"  id="button_manage"
-                                    class="btn btn-primary btn-lg">&nbsp;管&nbsp;理&nbsp; </button></a>
-
-                        </section>
-                    </c:if>
+                        
+                    
 
                 </article>
 
