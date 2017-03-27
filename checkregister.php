@@ -2,7 +2,7 @@
 @session_start();
 $user=trim($_POST['username']);
 $passwd=trim($_POST['password']);
-$email=trim($_POST['emial']);
+$email=trim($_POST['email']);
 
 
 include ("mysql.php");
