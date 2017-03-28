@@ -12,7 +12,7 @@ if($totalRows%$rowOnePage==0){
 if(isset($_GET['curPage'])){
 	$page=$_GET['curPage'];
 }else{
-	$curPage=$page=1;
+	$page=1;
 }
 $start=$rowOnePage*($page-1);
 $query_str="SELECT * FROM user ORDER BY id LIMIT $start,$rowOnePage";
@@ -34,14 +34,14 @@ $result=$link->query($query_str);
     <script src="js/pintuer.js"></script>
 </head>
 <body>
-<form method="post" action="">
+<form method="post" action="delselect.php">
   <div class="panel admin-panel">
     <div class="panel-head"><strong class="icon-reorder"> 反馈管理</strong></div>
     <div class="padding border-bottom">
       <ul class="search">
         <li>
-          <button type="button"  class="button border-green" id="checkall" onclick="SelectAll()"><span class="icon-check"></span> 全选</button>
-          <button type="button" class="button border-red" onclick="DelSelect(-1)"><span class="icon-trash-o"></span> 批量删除</button>
+          <button type="button"  class="button border-green" id="checkall" onclick="CheckAll()"><span class="icon-check"></span> 全选</button>
+          <a href="delselect.php"><button type="button" class="button border-red" ><span class="icon-trash-o"></span> 批量删除</button></a>
         </li>
       </ul>
     </div>
@@ -57,7 +57,7 @@ $result=$link->query($query_str);
       
 <?php
 while ($row=$result->fetch_assoc() ) {
-    echo '<tr><td><input type="checkbox">'.$row['id']."</td><td>".$row['user_name']."</td><td>".$row['email']."</td><td>".$row['rank']."</td><td>".$row['create_time'].'</td><td><div class="button-group"> <a class="button border-red" href="userdelete.php?id='.$row['id'].'">
+    echo '<tr><td><input type="checkbox" name="dell[]">'.$row['id']."</td><td>".$row['user_name']."</td><td>".$row['email']."</td><td>".$row['rank']."</td><td>".$row['create_time'].'</td><td><div class="button-group"> <a class="button border-red" href="userdelete.php?id='.$row['id'].'">
     <span class="icon-trash-o"></span> 删除</a> <a class="button border-red" href="rank.php?id='.$row['id'].'">
     <span class="icon-trash-o"></span> 编辑</a></div></td></tr>';
 }
@@ -68,78 +68,32 @@ while ($row=$result->fetch_assoc() ) {
       <td colspan="8"><div class="pagelist"> 
       <!-- <c:forEach var="i"  begin="1" end="${pages}" > </span><a href="admin/feedback_${i}.html">${i}</a></c:forEach>  -->
       <?php
-      echo "<a href='?curPage=$page'>".$page."</a>";
+      echo "<a href='edit_user.php?curPage=$page'>".$page."</a>";
 if($page>1){
 	$prevPage=$page-1;
-	echo "<a href='?curPage=$prevPage'>上一页</a>";
+	echo "<a href='edit_user.php?curPage=$prevPage'>上一页</a>";
 }if($page<$maxPage){
 	$nextPage=$page+1;
-	echo "<a href='?curPage=$nextPage'>下一页</a>";
+	echo "<a href='edit_user.php?curPage=$nextPage'>下一页</a>";
 }
 $result->close(); // 释放结果集;
 $link->close();
       ?>
+    
       </div></td>
     </table>
   </div>
 </form>
 <script type="text/javascript">
-$("#checkall").click(function(){ 
-  $("input[name='id[]']").each(function(){
-	  if (this.checked) {
-		  this.checked = false;
-	  }
-	  else {
-		  this.checked = true;
-	  }
-  });
-})
-
-function DelSelect(id){
-    var Checkbox=false;
-    var array = new Array();
-
-    if(id!=-1){
-        array.push(id);
-        Checkbox=true;
-
-    }else{
-        $("input[name='id[]']").each(function(){
-            if (this.checked==true) {
-                Checkbox=true;
-                var key=this.id;
-                array.push(key);
-                alert(key);
-            }
-        });
-    }
-
-	if (Checkbox){
-        var t=confirm("您确认要删除选中的内容吗？");
-        if (t==false) return false;
-        else{
-            $.ajax({
-                url:'delete/contact',
-                type:'post',
-                data: "DeleteList=" + array,
-                dataType: "json",
-                success:function(data){
-                    location.reload()
-                },
-                error:function(data){
-                    alert("删除失败");
-                },
-
-            })
-        }
+var checkall=document.getElementsByName("dell[]");  
+            function CheckAll(){                          //全选  
+                for(var $i=0;$i<checkall.length;$i++){  
+                    checkall[$i].checked=true;  
+                }  
+            }  
 
 
-    }
-	else{
-		alert("请选择您要删除的内容!");
-		return false;
-	}
-}
+
 
 </script>
 </body>
