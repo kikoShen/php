@@ -76,6 +76,7 @@ class DB{
        return $this->result;
     }
 
+    //个人发帖
     function getSelfPost($author){
        $tableName="post";
        $condition="where author='".$author."' and own = 0 ORDER BY id DESC";      
@@ -83,6 +84,15 @@ class DB{
        $this->result=$this->db->select($tableName,$condition);
        // $row=$this->db->rows($this->result); 
        return $this->result;
+    }
+
+    //获得个人信息
+    function getSelf($name){
+    	$tableName="user";
+    	$condition="where user_name='".$name."'";
+    	$this->result=$this->db->select($tableName,$condition);
+    	$oneRow=$this->db->myArray($this->result);
+       return $oneRow;
     }
 
     // 分页显示
@@ -97,19 +107,22 @@ class DB{
     $start=$rowOnePage*($page-1);
     $_SESSION['maxPage']=$maxPage;
     $condition=$prefix."ORDER BY id DESC LIMIT $start,$rowOnePage";
-    $_SESSION['condition']=$condition;
+    // $_SESSION['condition']=$condition;
     $this->result=$this->db->select($tableName,$condition);
     return $this->result;
     }
 
+    //他人发帖
     function getOtherPost($user){
     	$tableName="post";
        $condition="where author='".$user."' and own = 0 ORDER BY id DESC";      
-      //结果集
-       $this->result=$this->db->select($tableName,$condition);
-       // $row=$this->db->rows($this->result); 
+       $this->result=$this->db->select($tableName,$condition); 
        return $this->result;
     }
+
+
+
+
 
 }
 

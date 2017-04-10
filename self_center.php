@@ -1,6 +1,8 @@
 <?php 
 @session_start();
 include("mysql.php");
+$db=new DB();
+$info=$db->getSelf($_SESSION['username']);
 ?>
 
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
@@ -290,20 +292,13 @@ include("spinner.php");
                         </div>
                     </c:if>
                   
-                  
-                       
-                              <?php 
-                    $sql="select rank from user where user_name='".$_SESSION['username']."'";
-                    $result=$link->query($sql) or die("select failed!");
-                    $result=$result->fetch_assoc();
-                     if($result['rank']!=2){
+
+                    <?php  
+                        if($info['rank']!=2){
                           echo ' <section> <a href="admin/index.php" class="link-1"><button type="submit"  id="button_manage"
                                     class="btn btn-primary btn-lg">&nbsp;管&nbsp;理&nbsp; </button></a></section>';
                      }
-                     
-                     $link->close();
                     ?>
-
 
                             
 
