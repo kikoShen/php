@@ -2,7 +2,7 @@
 @session_start();
 include("mysql.php");
 $db=new DB();
-$info=$db->getSelf($_SESSION['username']);
+$info=$db->getSelf("user_name",$_SESSION['username']);
 ?>
 
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">

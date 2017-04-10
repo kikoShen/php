@@ -2,9 +2,8 @@
 @session_start();
 include("../mysql.php");
 $id=$_GET['id'];
-$sql="select * from user where id='".$id."'";
-$result=$link->query($sql)->fetch_assoc();
-
+$db=new DB();
+$result=$db->getSelf("id",$id);
 
 
 

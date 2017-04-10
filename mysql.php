@@ -86,10 +86,10 @@ class DB{
        return $this->result;
     }
 
-    //获得个人信息
-    function getSelf($name){
+    //获得个人信息(已知条件，已知信息）
+    function getSelf($info,$content){
     	$tableName="user";
-    	$condition="where user_name='".$name."'";
+    	$condition="where ".$info." = '".$content."'";
     	$this->result=$this->db->select($tableName,$condition);
     	$oneRow=$this->db->myArray($this->result);
        return $oneRow;
