@@ -57,16 +57,16 @@ class DB{
        $tableName="post";
        switch ($type) {
        	case '0':
-       		$condition="where board = ".$type."ORDER BY id DESC";
+       		$condition="where board = 0 ORDER BY id DESC";
        		break;
        	case '1':
-       		$condition="where board = ".$type."ORDER BY id DESC";
+       		$condition="where board = 1 ORDER BY id DESC";
        		break;
        	case '2':
-       		$condition="where board = ".$type."ORDER BY id DESC";
+       		$condition="where board = 2 ORDER BY id DESC";
        		break;
        	default:
-       		$condition=" ORDER BY id DESC";
+       		$condition="ORDER BY id DESC";
        		break;
        }
       
@@ -97,7 +97,7 @@ class DB{
     $start=$rowOnePage*($page-1);
     $_SESSION['maxPage']=$maxPage;
     $condition=$prefix."ORDER BY id DESC LIMIT $start,$rowOnePage";
-    // $_SESSION['condition']=$condition;
+    $_SESSION['condition']=$condition;
     $this->result=$this->db->select($tableName,$condition);
     return $this->result;
     }
