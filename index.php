@@ -1,96 +1,17 @@
 <?php
 @session_start();
 ?>
-<!DOCTYPE html>
+ <!DOCTYPE html>
 <html lang="en">
 	<head>
 	<title>Codester | Home</title>
-	<meta charset="utf-8">
-	<link rel="icon" href="http://dzyngiri.com/favicon.png" type="image/x-icon">
-    <link rel="shortcut icon" href="http://dzyngiri.com/favicon.png" type="image/x-icon" />
-    <meta name="description" content="Codester is a free responsive Bootstrap template by Dzyngiri">
-    <meta name="keywords" content="free, template, bootstrap, responsive">
-    <meta name="author" content="Inbetwin Networks">  
-	<link rel="stylesheet" href="css/bootstrap.css" type="text/css" media="screen">
-	<link rel="stylesheet" href="css/responsive.css" type="text/css" media="screen">
-	<link rel="stylesheet" href="css/style.css" type="text/css" media="screen">
-	<link rel="stylesheet" href="css/touchTouch.css" type="text/css" media="screen">
-	<link rel="stylesheet" href="css/kwicks-slider.css" type="text/css" media="screen">
-	<link href='http://fonts.googleapis.com/css?family=Open+Sans:400,300' rel='stylesheet' type='text/css'>
-	<script type="text/javascript" src="js/jquery.js"></script>
-    <script type="text/javascript" src="js/superfish.js"></script>
-	<script type="text/javascript" src="js/jquery.flexslider-min.js"></script>
-	<script type="text/javascript" src="js/jquery.kwicks-1.5.1.js"></script>
-	<script type="text/javascript" src="js/jquery.easing.1.3.js"></script>
-	<script type="text/javascript" src="js/jquery.cookie.js"></script>    
-	<script type="text/javascript" src="js/touchTouch.jquery.js"></script>
-	<script type="text/javascript">if($(window).width()>1024){document.write("<"+"script src='js/jquery.preloader.js'></"+"script>");}	</script>
-
-	<script>		
-		 jQuery(window).load(function() {	
-		 $x = $(window).width();		
-	if($x > 1024)
-	{			
-	jQuery("#content .row").preloader();    }	
-		 
-     jQuery('.magnifier').touchTouch();			
-    jQuery('.spinner').animate({'opacity':0},1000,'easeOutCubic',function (){jQuery(this).css('display','none')});	
-  		  }); 
-				
-	</script>
-
-  
-  
-
-	<!--[if lt IE 8]>
-  		<div style='text-align:center'><a href="http://www.microsoft.com/windows/internet-explorer/default.aspx?ocid=ie6_countdown_bannercode"><img src="http://www.theie6countdown.com/img/upgrade.jpg"border="0"alt=""/></a></div>  
- 	<![endif]-->
-	<!--[if (gt IE 9)|!(IE)]><!-->
-	<!--<![endif]-->
-	<!--[if lt IE 9]>
-    <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
-    <link rel="stylesheet" href="css/docs.css" type="text/css" media="screen">
-    <link rel="stylesheet" href="css/ie.css" type="text/css" media="screen">
-    <link href='http://fonts.googleapis.com/css?family=Open+Sans:300' rel='stylesheet' type='text/css'>
-    <link href='http://fonts.googleapis.com/css?family=Open+Sans:400' rel='stylesheet' type='text/css'>
-  <![endif]-->
 </head>
 
 	<body>
-    <div class="spinner"></div> 
-<!-- header start -->
-<header>
-      <div class="container clearfix">
-    <div class="row">
-          <div class="span12">
-        <div class="navbar navbar_">
-              <div class="container">
-            <h1 class="brand brand_"><a href="index.html"><img alt="" src="img/logo.png"> </a></h1>
-            <a class="btn btn-navbar btn-navbar_" data-toggle="collapse" data-target=".nav-collapse_">Menu <span class="icon-bar"></span> </a>
-            <div class="nav-collapse nav-collapse_  collapse">
-                  <ul class="nav sf-menu">
-                <li class="active"><a href="index.html">Home</a></li>
-                <li><a href="work.html">Work</a></li>
-                <li><a href="blog.html">Blog</a></li>
-                <?php 
-                  if(isset($_SESSION['username'])){
-                    echo '<li class="sub-menu"><a href="self_center.php">'.$_SESSION['username'].'</a><ul>
-                    <li><a href="logout.php">Logout</a></li>
-                  </ul></li>';
-                  }else{
-                    echo '<li><a href="login.php">Login</a></li>';
-                  }
-                ?>
-                
-                <li><a href="contact.html">Contact</a></li>
-              </ul>
-                </div>
-          </div>
-            </div>
-      </div>
-        </div>
-  </div>
-    </header>
+
+    <?php  
+    include("header.php");
+    include("spinner.php"); ?>
 <div class="bg-content">
       <div class="container">
     <div class="row">
@@ -110,7 +31,7 @@
               <h2>Namaskar!</h2>
               <div>
             <p>This template is designed and developed over the Bootstrap frontend framework. Which is a free front-end framework for designers. Template is fully <i>responsive</i> and <i>compatible</i> with all the major browsers.</p>
-            <p style="text-align:center; padding-top:20px;"><a href="#" class="btn btn-1">Download Bootstrap</a></p>
+            <p style="text-align:center; padding-top:20px;"><a href="post.php" class="btn btn-1">我要发帖</a></p>
           </div>
             </div>
       </div>
@@ -268,20 +189,8 @@
         </div>
   </div>
     </div>
-
-<!-- footer -->
-<footer>
-      <div class="container clearfix">
-    <ul class="list-social pull-right">
-          <li><a class="icon-1" href="#"></a></li>
-          <li><a class="icon-2" href="#"></a></li>
-          <li><a class="icon-3" href="#"></a></li>
-          <li><a class="icon-4" href="#"></a></li>
-        </ul>
-    <div class="privacy pull-left">&copy; Copyright &copy; 2013.Company name All rights reserved.<a target="_blank" href="http://sc.chinaz.com/moban/">&#x7F51;&#x9875;&#x6A21;&#x677F;</a></div>
-  </div>
-    </footer>
-<script type="text/javascript" src="js/bootstrap.js"></script>
-<div style="display:none"><script src='http://v7.cnzz.com/stat.php?id=155540&web_id=155540' language='JavaScript' charset='gb2312'></script></div>
+<?php
+include("footer.php"); 
+?>
 </body>
 </html>

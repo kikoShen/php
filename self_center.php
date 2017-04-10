@@ -2,33 +2,12 @@
 @session_start();
 include("mysql.php");
 ?>
-<script language="javascript" type="text/javascript">
-    if(top.location!=self.location)top.location=self.location;
-</script>
+
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>
 <head>
 	<title>Codester | SelfCenter</title>
-	<meta charset="utf-8">
-	<link rel="icon" href="http://dzyngiri.com/favicon.png" type="image/x-icon">
-    <link rel="shortcut icon" href="http://dzyngiri.com/favicon.png" type="image/x-icon" />
-    <meta name="description" content="Codester is a free responsive Bootstrap template by Dzyngiri">
-    <meta name="keywords" content="free, template, bootstrap, responsive">
-    <meta name="author" content="Inbetwin Networks">  
-	<link rel="stylesheet" href="css/bootstrap.css" type="text/css" media="screen">
-	<link rel="stylesheet" href="css/responsive.css" type="text/css" media="screen">
-	<link rel="stylesheet" href="css/style.css" type="text/css" media="screen">
-	<link rel="stylesheet" href="css/touchTouch.css" type="text/css" media="screen">
-	<link rel="stylesheet" href="css/kwicks-slider.css" type="text/css" media="screen">
-	<link href='http://fonts.googleapis.com/css?family=Open+Sans:400,300' rel='stylesheet' type='text/css'>
-	<script type="text/javascript" src="js/jquery.js"></script>
-    <script type="text/javascript" src="js/superfish.js"></script>
-	<script type="text/javascript" src="js/jquery.flexslider-min.js"></script>
-	<script type="text/javascript" src="js/jquery.kwicks-1.5.1.js"></script>
-	<script type="text/javascript" src="js/jquery.easing.1.3.js"></script>
-	<script type="text/javascript" src="js/jquery.cookie.js"></script>    
-	<script type="text/javascript" src="js/touchTouch.jquery.js"></script>
-	<script type="text/javascript">if($(window).width()>1024){document.write("<"+"script src='js/jquery.preloader.js'></"+"script>");}	</script>
+	
 <script type="text/javascript">
     var count=0;
     function update_userdata(){
@@ -129,40 +108,10 @@ include("mysql.php");
 </head>
 <body>
 	
-
-<!-- header start -->
-<header>
-      <div class="container clearfix">
-    <div class="row">
-          <div class="span12">
-        <div class="navbar navbar_">
-              <div class="container">
-            <h1 class="brand brand_"><a href="index.html"><img alt="" src="img/logo.png"> </a></h1>
-            <a class="btn btn-navbar btn-navbar_" data-toggle="collapse" data-target=".nav-collapse_">Menu <span class="icon-bar"></span> </a>
-            <div class="nav-collapse nav-collapse_  collapse">
-                  <ul class="nav sf-menu">
-                <li class="active"><a href="index.html">Home</a></li>
-                <li><a href="work.html">Work</a></li>
-                <li><a href="blog.html">Blog</a></li>
-                <?php 
-                  if(isset($_SESSION['username'])){
-                    echo '<li class="sub-menu"><a href="self_center.php">'.$_SESSION['username'].'</a><ul>
-                    <li><a href="logout.php">Logout</a></li>
-                  </ul></li>';
-                  }else{
-                    echo '<li><a href="login.php">Login</a></li>';
-                  }
-                ?>
-                
-                <li><a href="contact.html">Contact</a></li>
-              </ul>
-                </div>
-          </div>
-            </div>
-      </div>
-        </div>
-  </div>
-    </header>
+<?php
+include("header.php");
+include("spinner.php");
+?>
 
 <div class="bg-content">
     <div id="content"><div class="ic"></div>
@@ -177,7 +126,35 @@ include("mysql.php");
                             beta-version
 
                             <div class="container" >
-                                <iframe scrolling="auto" rameborder="0" src="${centerUser.id}_1.myforum" name="right" width="80%" height="60%"></iframe>
+                                <?php 
+                        $db=new DB();
+                        $result=$db->getSelfPost($_SESSION['username']);
+                        $rows=$db->getRows($result);
+                        $prefix="where author='".$_SESSION['username']."' and own = 0 ";
+                        if(isset($_GET['curPage'])){
+                            $page=$_GET['curPage'];
+                        }else{
+                            $page=1;
+                        }
+                        if($rows>0){
+                          $result=$db->fenye($result,"post",$page,$prefix);                         
+                           while ($row=$db->fetch($result) ) {         
+                                echo '<li>
+                                     <h3>'.$row['title'].'</h3>
+                                    <time datetime="2017-04-07" class="date-1"><i class="icon-calendar icon-white"></i>'.$row['post_time'].'</time>
+                                   <div class="name-author"><i class="icon-user icon-white"></i> <a href="#">'.$row['author'].'</a></div>
+                                    <a href="#" class="comments"><i class="icon-comment icon-white"></i>评论数:0</a>
+
+                                     <div class="clear"></div>'.$row['text'].'<br><br>
+
+                                   
+                                    <a href="tie.php?" class="btn btn-1">Read More</a></li>';
+                            
+                           }
+                        }else{
+                            echo "<li><h5>你还没有发言...心理有问题吗？> <</h5></li>";
+                           }
+                        ?>
                             </div>
 
                         </ul>
@@ -390,19 +367,8 @@ include("mysql.php");
 </div>
 
 
-<!--============================== footer =================================-->
-<footer>
-    <div class="container clearfix">
-        <ul class="list-social pull-right">
-            <li><a class="icon-1" href="#"></a></li>
-            <li><a class="icon-2" href="#"></a></li>
-            <li><a class="icon-3" href="#"></a></li>
-            <li><a class="icon-4" href="#"></a></li>
-        </ul>
-        <div class="privacy pull-left">&copy; Copyright &copy; 2016.College Art  All rights reserved.<a target="_blank" href="http://sc.chinaz.com/moban/"></a></div>
-    </div>
-</footer>
-<script type="text/javascript" src="js/bootstrap.js"></script>
-<div style="display:none"><script src='http://v7.cnzz.com/stat.php?id=155540&web_id=155540' language='JavaScript' charset='gb2312'></script></div>
+<?php
+include("footer.php");
+?>
 </body>
 </html>
