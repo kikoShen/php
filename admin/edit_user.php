@@ -1,23 +1,5 @@
 <?php
 include("../mysql.php");
-$rowOnePage=7;
-$sql="select * from user";
-$result=$link->query($sql);
-$totalRows=$result->num_rows;
-if($totalRows%$rowOnePage==0){
-	$maxPage=(int)($totalRows/$rowOnePage);
-}else{
-	$maxPage=(int)($totalRows/$rowOnePage)+1;
-}
-if(isset($_GET['curPage'])){
-	$page=$_GET['curPage'];
-}else{
-	$page=1;
-}
-$start=$rowOnePage*($page-1);
-$query_str="SELECT * FROM user ORDER BY id LIMIT $start,$rowOnePage";
-$result=$link->query($query_str);
-
 ?>
 <!DOCTYPE html>
 <html lang="zh-cn">
@@ -55,20 +37,57 @@ $result=$link->query($query_str);
         <th>操作</th>       
       </tr>
       
-<?php
-while ($row=$result->fetch_assoc() ) {
-    echo '<tr><td><input type="checkbox" name="dell[]">'.$row['id']."</td><td>".$row['user_name']."</td><td>".$row['email']."</td><td>".$row['rank']."</td><td>".$row['create_time'].'</td><td><div class="button-group"> <a class="button border-red" href="userdelete.php?id='.$row['id'].'">
-    <span class="icon-trash-o"></span> 删除</a> <a class="button border-red" href="rank.php?id='.$row['id'].'">
-    <span class="icon-trash-o"></span> 编辑</a></div></td></tr>';
+<?php 
+function convertRank($rank){
+  switch ($rank) {
+    case '0':
+      return '超级管理员' ;
+      break;
+    case '1':
+      return '管理员' ;
+      break;
+    case '2':
+      return '普通用户' ;
+      break;
+    default:
+      return '非法用户';
+      break;
+  }
+
 }
-?>
+ ?>
+
+
+<?php 
+                        $db=new DB();
+                        $result=$db->getUsers();
+                        if(isset($_GET['curPage'])){
+                            $page=$_GET['curPage'];
+                        }else{
+                          $page=1;
+                        }
+                           
+                          $result=$db->fenye($result,"user",$page,"");
+
+
+                           while ($row=$db->fetch($result) ) {                     
+                        echo '<tr><td><input type="checkbox" name="dell[]">'.$row['id']."</td><td>".$row['user_name']."</td><td>".$row['email']."</td><td>" ;
+                        echo convertRank($row['rank'])."</td><td>".$row['create_time'].'</td><td><div class="button-group"> 
+                           <a class="button border-red" href="userdelete.php?id='.$row['id'].'">
+                          <span class="icon-trash-o"></span> 删除</a> <a class="button border-red" href="rank.php?id='.$row['id'].'">
+                          <span class="icon-trash-o"></span> 编辑</a></div></td></tr>';
+                            
+                           }
+                        
+ ?>
      
 
 
       <td colspan="8"><div class="pagelist"> 
       <!-- <c:forEach var="i"  begin="1" end="${pages}" > </span><a href="admin/feedback_${i}.html">${i}</a></c:forEach>  -->
-      <?php
-      echo "<a href='edit_user.php?curPage=$page'>".$page."</a>";
+<?php
+$maxPage=$_SESSION['maxPage'];
+echo "<a href='edit_user.php?curPage=$page'>".$page."</a>";
 if($page>1){
 	$prevPage=$page-1;
 	echo "<a href='edit_user.php?curPage=$prevPage'>上一页</a>";
@@ -76,9 +95,9 @@ if($page>1){
 	$nextPage=$page+1;
 	echo "<a href='edit_user.php?curPage=$nextPage'>下一页</a>";
 }
-$result->close(); // 释放结果集;
-$link->close();
-      ?>
+?>
+
+      
     
       </div></td>
     </table>

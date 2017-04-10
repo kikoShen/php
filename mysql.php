@@ -95,6 +95,14 @@ class DB{
        return $oneRow;
     }
 
+     //全体用户信息
+    function getUsers(){
+       $tableName="user";
+       $condition="";
+       $this->result=$this->db->select($tableName,$condition);
+       return $this->result;
+    }
+
     // 分页显示
     function fenye($result,$tableName,$page,$prefix){
     $rowOnePage=5;

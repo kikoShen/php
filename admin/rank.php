@@ -4,6 +4,10 @@ include("../mysql.php");
 $id=$_GET['id'];
 $sql="select * from user where id='".$id."'";
 $result=$link->query($sql)->fetch_assoc();
+
+
+
+
 ?>
 <!DOCTYPE html>
 <html lang="zh-cn">
