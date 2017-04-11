@@ -26,12 +26,12 @@
   <div class="leftnav-title"><strong><span class="icon-list"></span>菜单列表</strong></div>
   <h2><span class="icon-user"></span>基本设置</h2>
   <ul style="display:block">
-    <li><a href="admin/notice.html" target="right"><span class="icon-caret-right"></span>发布公告</a></li>
-    <li><a href="admin/feedback_1.html" target="right"><span class="icon-caret-right"></span>反馈管理</a></li>
+    <li><a href="notice.php" target="right"><span class="icon-caret-right"></span>发布公告</a></li>
+    <li><a href="feedback_1.php" target="right"><span class="icon-caret-right"></span>反馈管理</a></li>
   </ul>   
   <h2><span class="icon-pencil-square-o"></span>栏目管理</h2>
   <ul>
-      <li><a href="rank.php" target="right"><span class="icon-caret-right"></span>权限设置</a></li>
+      <!-- <li><a href="rank.php" target="right"><span class="icon-caret-right"></span>权限设置</a></li> -->
     <li><a href="edit_user.php" target="right"><span class="icon-caret-right"></span>用户管理</a></li>
     <li><a href="add_user.php" target="right"><span class="icon-caret-right"></span>增加用户</a></li>
   </ul>  

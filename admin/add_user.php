@@ -16,13 +16,13 @@
 <div class="panel admin-panel">
   <div class="panel-head" id="add"><strong><span class="icon-pencil-square-o"></span>增加用户</strong></div>
   <div class="body-content">
-    <form method="post"  class="form-x" action="user/update">
+    <form method="post"  class="form-x" action="addUser.class.php">
       <div class="form-group">
         <div class="label">
           <label>用户ID：</label>
         </div>
         <div class="field">
-          <input type="number" class="input w50"  name="id" readonly="true" data-validate="required:请输入ID"  value="${u_user.id}" >
+          <input type="number" class="input w50"  name="id" readonly="true" data-validate="required:请输入ID"  value="" >
           <div class="tips"></div>
         </div>
       </div>
@@ -31,7 +31,7 @@
           <label>邮箱：</label>
         </div>
         <div class="field">
-          <input type="text" class="input w50"  name="email" data-validate="required:请输入邮箱"  value="${u_user.email}"/>
+          <input type="text" class="input w50"  name="email" data-validate="required:请输入邮箱"  value=""/>
           <div class="tips"></div>
         </div>
       </div>
@@ -40,7 +40,7 @@
           <label>密码：</label>
         </div>
         <div class="field">
-          <input type="text" class="input w50"  name="passwordHash" data-validate="required:请输入用户吗"  value="${u_user.passwordHash}"/>
+          <input type="text" class="input w50"  name="password" data-validate="required:请输入用户吗"  value=""/>
           <div class="tips"></div>
         </div>
       </div>
@@ -49,7 +49,7 @@
         <label>用户名：</label>
       </div>
       <div class="field">
-        <input type="text" class="input w50"  name="nuserName" data-validate="required:请输入用户名"  value="${u_user.nuserName}"/>
+        <input type="text" class="input w50"  name="username" data-validate="required:请输入用户名"  value=""/>
         <div class="tips"></div>
       </div>
     </div>
@@ -60,10 +60,10 @@
           </div>
           <div class="field">
             <select name="authority" class="input w50">
-              <option value="0">请选择分类</option>
-              <option value="0">普通用户</option>
-              <option value="233">普通管理员</option>
-              <option value="666">超级管理员</option>
+              <option value="2">请选择分类</option>
+              <option value="2">普通用户</option>
+              <option value="1">普通管理员</option>
+              <option value="0">超级管理员</option>
             </select>
             <div class="tips"></div>
           </div>

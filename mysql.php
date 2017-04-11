@@ -3,9 +3,9 @@ require_once("conn.php");
 
 class DB{
     private $db;
-    private $result;
-    private $array;
-    private $signal;
+    private $result; //mysqli_result
+    private $array;  //mysqli_array
+    private $signal; //bool
 
     function __construct(){
     	$this->db=new Conn('localhost:3306','root','gzh1105','ej');
@@ -137,7 +137,22 @@ class DB{
     	return $this->result;
     }
 
+     //id更新user信息
+     function UpdateUser($id,$user_name,$passwd,$email,$rank){
+     	$tableName="user";
+     	$change="user_name='".$user_name."',password='".$passwd."',email='".$email."',rank=".$rank;
+     	$condition="where id =".$id;
+     	$this->signal=$this->db->update($tableName,$change,$condition);
+     	return $this->signal;
+     }
 
+    function addUser($user_name,$passwd,$email,$rank){
+         $tableName="user";
+         $fields="(user_name,password,email,rank)";
+         $value="('".$user_name."','".$passwd."','".$email."',".$rank.")";
+         $this->signal=$this->db->insert($tableName,$fields,$value);
+         return $this->signal;
+    }
 
 }
 
