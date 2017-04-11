@@ -2,7 +2,7 @@
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>
 <head>
-    <title>Codester | Board</title>
+    <title>Codester | Trade</title>
 </head>
 <body>
 <?php  
@@ -25,21 +25,22 @@ include("mysql.php");
 
                         <?php 
                         $db=new DB();
-                        $result=$db->getPost('board');
+                        $result=$db->getPost('1');
+                        $prefix="where board= 1 and own = 0 ";
                         if(isset($_GET['curPage'])){
                             $page=$_GET['curPage'];
                         }else{
                           $page=1;
                         }
                         if($result){
-                          $result=$db->fenye($result,"post",$page,"");
+                          $result=$db->fenye($result,"post",$page,$prefix);
                            while ($row=$db->fetch($result) ) {
                                 
                                 
                                 echo '<li>
                                      <h3>'.$row['title'].'</h3>
-                                    <time datetime="2017-04-07" class="date-1"><i class="icon-calendar icon-white"></i>'.$row['post_time'].'</time>';
-                                echo   '<div class="name-author"><i class="icon-user icon-white"></i> <a href="self_center.php?author='.$row['author'].'">'.$row['author'].'</a></div>
+                                    <time datetime="2017-04-07" class="date-1"><i class="icon-calendar icon-white"></i>'.$row['post_time'].'</time>
+                                   <div class="name-author"><i class="icon-user icon-white"></i> <a href="#">'.$row['author'].'</a></div>
                                     <a href="#" class="comments"><i class="icon-comment icon-white"></i>评论数:0</a>
 
                                      <div class="clear"></div>'.$row['text'].'<br><br>';

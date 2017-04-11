@@ -57,13 +57,13 @@ class DB{
        $tableName="post";
        switch ($type) {
        	case '0':
-       		$condition="where board = 0 ORDER BY id DESC";
+       		$condition="where board = 0 ORDER BY id DESC";//emotion
        		break;
        	case '1':
-       		$condition="where board = 1 ORDER BY id DESC";
+       		$condition="where board = 1 ORDER BY id DESC";//trade
        		break;
        	case '2':
-       		$condition="where board = 2 ORDER BY id DESC";
+       		$condition="where board = 2 ORDER BY id DESC";//mix
        		break;
        	default:
        		$condition="ORDER BY id DESC";
@@ -84,6 +84,17 @@ class DB{
        $this->result=$this->db->select($tableName,$condition);
        // $row=$this->db->rows($this->result); 
        return $this->result;
+    }
+
+    //单个帖子
+    function getTie($id){
+      $tableName="post";
+       $condition="where id = ".$id;     
+        // $_SESSION['condition']=$condition;
+       $this->result=$this->db->select($tableName,$condition);
+         // $_SESSION['result']=$this->result;
+       $row=$this->db->myArray($this->result);
+       return $row;
     }
 
     //获得个人信息(已知条件，已知信息）
