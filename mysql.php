@@ -128,7 +128,14 @@ class DB{
        return $this->result;
     }
 
-
+    function deleteSingleUser($info,$content){
+    	$tableName="user";
+    	$condition="where ".$info." = ".$content;
+    	$_SESSION['condition']=$condition;
+    	//true or false
+    	$this->result=$this->db->delete($tableName,$condition);
+    	return $this->result;
+    }
 
 
 

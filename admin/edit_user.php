@@ -54,6 +54,16 @@ function convertRank($rank){
       break;
   }
 
+ function delete($id){
+    $db=new DB();
+    $signal=$db->deleteSingleUser("id",$id);
+    if($signal){
+    header("location:edit_user.php");
+     }else {
+       echo "<script>alert('删除用户失败！');history.back(); </script>";
+     }
+ }
+
 }
  ?>
 
@@ -72,7 +82,7 @@ function convertRank($rank){
 
                            while ($row=$db->fetch($result) ) {                     
                         echo '<tr><td><input type="checkbox" name="dell[]">'.$row['id']."</td><td>".$row['user_name']."</td><td>".$row['email']."</td><td>" ;
-                        echo convertRank($row['rank'])."</td><td>".$row['create_time'].'</td><td><div class="button-group"> 
+                          echo convertRank($row['rank'])."</td><td>".$row['create_time'].'</td><td><div class="button-group"> 
                            <a class="button border-red" href="userdelete.php?id='.$row['id'].'">
                           <span class="icon-trash-o"></span> 删除</a> <a class="button border-red" href="rank.php?id='.$row['id'].'">
                           <span class="icon-trash-o"></span> 编辑</a></div></td></tr>';
