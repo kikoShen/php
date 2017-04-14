@@ -40,13 +40,13 @@ include("mysql.php");
                                 echo '<li>
                                      <h3>'.$row['title'].'</h3>
                                     <time datetime="2017-04-07" class="date-1"><i class="icon-calendar icon-white"></i>'.$row['post_time'].'</time>
-                                   <div class="name-author"><i class="icon-user icon-white"></i> <a href="#">'.$row['author'].'</a></div>
+                                   <div class="name-author"><i class="icon-user icon-white"></i> <a href="self_center.php?author='.$row['author'].'">'.$row['author'].'</a></div>
                                     <a href="#" class="comments"><i class="icon-comment icon-white"></i>评论数:0</a>
 
                                      <div class="clear"></div>'.$row['text'].'<br><br>
 
                                    
-                                    <a href="tie.php?" class="btn btn-1">Read More</a></li>';
+                                    <a href="tie.php?id='.$row['id'].'" class="btn btn-1">Read More</a></li>';
                             
                            }
                         }else{
