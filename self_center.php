@@ -2,7 +2,12 @@
 @session_start();
 include("mysql.php");
 $db=new DB();
-$info=$db->getSelf("user_name",$_SESSION['username']);
+if($_GET['author']==$_SESSION['username']){
+    $who=$$_SESSION['username'];
+}else{
+    $who=$_GET['author'];
+}
+$info=$db->getSelf("user_name",$who);
 ?>
 
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
@@ -129,10 +134,10 @@ include("spinner.php");
 
                             <div class="container" >
                                 <?php 
-                        $db=new DB();
-                        $result=$db->getSelfPost($_SESSION['username']);
+                        
+                        $result=$db->getSelfPost($who);
                         $rows=$db->getRows($result);
-                        $prefix="where author='".$_SESSION['username']."' and own = 0 ";
+                        $prefix="where author='".$who."' and own = 0 ";
                         if(isset($_GET['curPage'])){
                             $page=$_GET['curPage'];
                         }else{
