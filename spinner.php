@@ -29,6 +29,7 @@
                 <?php 
                   if(isset($_SESSION['username'])){
                     echo '<li class="sub-menu"><a href="self_center.php">'.$_SESSION['username'].'</a><ul>
+                     <li><a href="yunpan.php">Repository</a></li>
                     <li><a href="logout.php">Logout</a></li>
                   </ul></li>';
                   }else{
