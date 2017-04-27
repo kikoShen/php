@@ -34,9 +34,9 @@ class DB{
  	}
 
  	function register($name,$pwd,$email){
- 	   $tableName="user";
-       $fields="(user_name,password,email)";
-      $value="('".$user."','".$passwd."','".$email."')";
+ 	    $tableName="user";
+      $fields="(user_name,password,email)";
+      $value="('".$name."','".$pwd."','".$email."')";
       $this->result=$this->db->insert($tableName,$fields,$value);
       return $this->result;
  	}

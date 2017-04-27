@@ -2,8 +2,9 @@
 @session_start();
 include("mysql.php");
 $db=new DB();
-if($_GET['author']==$_SESSION['username']){
-    $who=$$_SESSION['username'];
+//不是从帖子板块过来的链接，或者帖子是自己发送的
+if(empty($_GET['author'])||$_GET['author']==$_SESSION['username']){
+    $who=$_SESSION['username'];
 }else{
     $who=$_GET['author'];
 }
