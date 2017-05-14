@@ -8,6 +8,7 @@
    if($row){
         session_start();
         $_SESSION['username']=$row['user_name'];
+        $_SESSION['USER_ROOT']="cloud/".$_SESSION['username'];
         echo "<script language='javascript'>alert('Login Success');location.href='index.php';</script>";
    }else{
      print "<script>alert('密码或用户名错误！');history.back(); </script>";

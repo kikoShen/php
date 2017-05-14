@@ -165,6 +165,98 @@ class DB{
          return $this->signal;
     }
 
+
+    //插入用户文件夹记录到user_files表
+    function createDir($userid,$file_name,$path){
+      $tableName="user_files";
+      $fields="(user_id,file_name,type,path)";
+      $value="(".$userid.",'".$file_name."', 0 ,'".$path."')";
+      $this->result=$this->db->insert($tableName,$fields,$value);
+      //boolean
+      return $this->result;
+    }
+      // 插入上传文件记录到user_files表
+      function uploadFile($userid,$file_name,$path,$size){
+      $tableName="user_files";
+      $fields="(user_id,file_name,type,path,file_size)";
+      $value="(".$userid.",'".$file_name."', 1 ,'".$path."',".$size.")";
+      $this->result=$this->db->insert($tableName,$fields,$value);
+      //boolean
+      return $this->result;
+    }
+//upload_file.php 暂未用到
+//查找“xx” 文件是否存在，返回关联数组
+      function fileExists($filename){
+      $tableName="user_files";
+       $condition="where filename = ".$filename;     
+        // $_SESSION['condition']=$condition;
+       $this->result=$this->db->select($tableName,$condition);
+         // $_SESSION['result']=$this->result;
+       $row=$this->db->myArray($this->result);
+       return $row;
+    }
+    
+    //获取当前用户文件夹下的所有的上传记录
+    function getFiles($path){
+      $tableName="user_files";
+       $condition="where path = '".$path."'";
+       $this->result=$this->db->select($tableName,$condition);
+         // $_SESSION['result']=$this->result;
+       return $this->result;
+    }
+
+    //获取某个文件在users_files里的信息
+     function getFileInfo($id){
+      $tableName="user_files";
+       $condition="where id = ".$id;
+       $this->result=$this->db->select($tableName,$condition);
+          //$_SESSION['result']=$this->result;
+       return $this->result;
+    }
+
+
+    function delDir($path){
+      $tableName="user_files";
+      $condition="where path  LIKE'".$path."%'";
+      //true or false
+      $this->result=$this->db->delete($tableName,$condition);
+      return $this->result;
+    }
+
+    function delFile($path,$filename){
+      $tableName="user_files";
+      $condition="where path = '".$path."' and file_name ='".$filename."'";
+      //true or false
+      $this->result=$this->db->delete($tableName,$condition);
+      return $this->result;
+    }
+  
+  
+    function share($id){
+      $tableName="user_files";
+      $change="pub = 1";
+      $condition="where id = ".$id;
+      $this->result=$this->db->update($tableName,$change,$condition);
+      return $this->result;//影响行数
+  }
+
+  function cancelShare($id){
+      $tableName="user_files";
+      $change="pub = 0";
+      $condition="where id = ".$id;
+      $this->result=$this->db->update($tableName,$change,$condition);
+      return $this->result;//影响行数
+  }
+
+ //查询此人是否有共享文件
+function isPub($who){
+       $tableName="user_files";
+       $condition="where pub= 1 and path LIKE'cloud/".$who."/%'";      
+      //结果集
+       $this->result=$this->db->select($tableName,$condition);
+       // $row=$this->db->rows($this->result); 
+       return $this->result;
+  }
 }
 
 

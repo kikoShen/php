@@ -85,7 +85,7 @@ function convertRank($rank){
                           echo convertRank($row['rank'])."</td><td>".$row['create_time'].'</td><td><div class="button-group"> 
                            <a class="button border-red" href="userdelete.php?id='.$row['id'].'">
                           <span class="icon-trash-o"></span> 删除</a> <a class="button border-red" href="rank.php?id='.$row['id'].'">
-                          <span class="icon-trash-o"></span> 编辑</a></div></td></tr>';
+                          <span class="icon-cog"></span> 编辑</a></div></td></tr>';
                             
                            }
                         

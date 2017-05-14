@@ -8,7 +8,7 @@ if(empty($_GET['author'])||$_GET['author']==$_SESSION['username']){
 }else{
     $who=$_GET['author'];
 }
-$info=$db->getSelf("user_name",$who);
+$info=$db->getSelf("user_name",$who);//帖子集合
 ?>
 
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
@@ -190,10 +190,11 @@ include("spinner.php");
                     <div>
                         <c:if test="${user.id==centerUser.id}">
                             <section> <a href="#" class="link-1"></a>
-                                <form id="${user.id}" action="uploads/userIcon" method="post" enctype="multipart/form-data">
-                                    照片：<input type="file" name="icon" src=""/>
+                                <form id="${user.id}" <?php echo 'action="work.php?author='.$who.'"';?> method="post" >
+                                    <!-- 照片：<input type="file" name="icon" src=""/> -->
                                     <button type="submit"  id="submit_btn"
-                                            class="btn btn-primary btn-lg">&nbsp;上&nbsp;传&nbsp; </button>
+                                            class="btn btn-primary btn-lg">&nbsp;分&nbsp;享&nbsp; </button>
+                      
                                 </form>
                             </section>
                         </c:if>
